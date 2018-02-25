@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{192BC768-A7C9-42E6-8766-0CCC78B9C7F2}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7D67DA01-667D-411F-A222-1757A12ACFC7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockHttpClient", "src\MockHttpClient\MockHttpClient.csproj", "{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8E8E7355-5E6A-447C-B20E-8E864BA736F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MockHttpClient.Test", "tests\MockHttpClient.Test\MockHttpClient.Test.csproj", "{AD86A4EA-5799-4101-8B09-9774BD31F0A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD86A4EA-5799-4101-8B09-9774BD31F0A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD86A4EA-5799-4101-8B09-9774BD31F0A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD86A4EA-5799-4101-8B09-9774BD31F0A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD86A4EA-5799-4101-8B09-9774BD31F0A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072} = {7D67DA01-667D-411F-A222-1757A12ACFC7}
+		{AD86A4EA-5799-4101-8B09-9774BD31F0A7} = {8E8E7355-5E6A-447C-B20E-8E864BA736F4}
+	EndGlobalSection
+EndGlobal

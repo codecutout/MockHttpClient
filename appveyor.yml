@@ -1,0 +1,28 @@
+version: build.{build}
+skip_tags: true
+image: Visual Studio 2017
+configuration: Release
+before_build:
+- ps: >-
+    nuget restore
+    [xml]$proj = Get-Content src/MockHttpClient/MockHttpClient.csproj
+    $semver = $proj.Project.PropertyGroup.Version
+    Set-AppveyorBuildVariable "semver" $semver
+    Update-AppveyorBuild -Version "$semver-build.${env:APPVEYOR_BUILD_NUMBER}"
+build:
+  verbosity: minimal
+artifacts:
+- path: src\MockHttpClient\bin\Release\MockHttpClient.*.*.*.nupkg
+  name: nupkg
+deploy:
+- provider: NuGet
+  api_key:
+    secure: 1VtoQkeVHGWnMyobYFPKUP9HRqllsKlEL3CJyZ58PH6U7RpKpTsqIHeJBv83iJuF
+  on:
+    branch: master
+- provider: GitHub
+  tag: v$(semver)
+  auth_token:
+    secure: UfAp6rTXME04eu+jQR6jmm+DwiN0aVGkBZtaYqnyT6BanDVPMfT/WUGM0BU+fwVk
+  on:
+    branch: master
