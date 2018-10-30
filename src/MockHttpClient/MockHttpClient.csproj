@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard1.4;net462</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Alex Davies</Authors>
     <Company>Codecutout</Company>
     <Description>Easily mock HttpClient with canned responses to make testing easier</Description>
