@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;net462</TargetFrameworks>
+    <TargetFrameworks>net5.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Version>1.0.1</Version>
     <Authors>Alex Davies</Authors>
     <Company>Codecutout</Company>
     <Description>Easily mock HttpClient with canned responses to make testing easier</Description>
-    <PackageLicenseUrl>https://github.com/codecutout/MockHttpClient/blob/master/LICENSE</PackageLicenseUrl>
+    <License>https://github.com/codecutout/MockHttpClient/blob/master/LICENSE</License>
     <PackageProjectUrl>https://github.com/codecutout/MockHttpClient</PackageProjectUrl>
     <PackageTags>MockHttpClient Mock Fake HttpClient HttpMessageHandler</PackageTags>
     <AssemblyVersion>1.0.1.0</AssemblyVersion>
@@ -20,11 +20,8 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Net.Http" />
   </ItemGroup>
 
 </Project>
