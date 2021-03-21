@@ -10,7 +10,7 @@ jobs:
 
     steps:
     - name: Set RELEASE_VERSION
-      run: echo "RELEASE_VERSION::${GITHUB_REF:11}" >> $GITHUB_ENV #GITHUB_REF:11 skips first 11 characters of GITHUB_REF (GITHUB_REF will look like 'refs/tags/v*.*.*')
+      run: echo "RELEASE_VERSION=${GITHUB_REF:11}" >> $GITHUB_ENV #GITHUB_REF:11 skips first 11 characters of GITHUB_REF (GITHUB_REF will look like 'refs/tags/v*.*.*')
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
