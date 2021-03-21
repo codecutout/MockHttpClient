@@ -1,12 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{192BC768-A7C9-42E6-8766-0CCC78B9C7F2}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
 		README.md = README.md
+		.github\workflows\release.yaml = .github\workflows\release.yaml
+		.github\workflows\test.yaml = .github\workflows\test.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7D67DA01-667D-411F-A222-1757A12ACFC7}"
@@ -38,5 +39,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DCC322E6-693C-4B5B-B7FE-3D3A3C9FB072} = {7D67DA01-667D-411F-A222-1757A12ACFC7}
 		{AD86A4EA-5799-4101-8B09-9774BD31F0A7} = {8E8E7355-5E6A-447C-B20E-8E864BA736F4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {908DC24D-C669-44B3-B06F-8C04563AF94F}
 	EndGlobalSection
 EndGlobal

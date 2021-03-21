@@ -1,21 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.4;net462</TargetFrameworks>
+    <TargetFrameworks>netstandard1.4;net462;net5.0</TargetFrameworks>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
-    <Authors>Alex Davies</Authors>
+	<Authors>Alex Davies</Authors>
     <Company>Codecutout</Company>
     <Description>Easily mock HttpClient with canned responses to make testing easier</Description>
-    <PackageLicenseUrl>https://github.com/codecutout/MockHttpClient/blob/master/LICENSE</PackageLicenseUrl>
+	<License>https://github.com/codecutout/MockHttpClient/blob/master/LICENSE</License>
     <PackageProjectUrl>https://github.com/codecutout/MockHttpClient</PackageProjectUrl>
     <PackageTags>MockHttpClient Mock Fake HttpClient HttpMessageHandler</PackageTags>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <FileVersion>1.0.1.0</FileVersion>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +17,7 @@
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net462'">
     <Reference Include="System.Net.Http" />
   </ItemGroup>
 
