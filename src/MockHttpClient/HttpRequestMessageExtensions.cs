@@ -5,6 +5,8 @@ using System.Net.Http;
 
 namespace MockHttpClient
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Provides extension methods on <see cref="HttpRequestMessage"/>
     /// </summary>
@@ -130,7 +132,104 @@ namespace MockHttpClient
 
             return false;
         }
+
+        /// <summary>
+        /// Determines whether the request contains the specified content as string.
+        /// </summary>
+        /// <param name="request">the request</param>
+        /// <param name="expectedContent">the expected content</param>
+        /// <returns></returns>
+        public static bool HasStringContent(this HttpRequestMessage request, string expectedContent)
+        {
+            if (request.Content == null)
+            {
+                throw new ArgumentException($"string content '{expectedContent}' was expected but content is null");
+            }
+
+            var content = request.Content.ReadAsStringAsync().Result;
+
+            return content.Equals(expectedContent);
+        }
+
+        /// <summary>
+        /// Determines whether the request contains the specified content as json object.
+        /// </summary>
+        /// <typeparam name="T">The type of the expected content</typeparam>
+        /// <param name="request">the request</param>
+        /// <param name="expectedContent">the expected content</param>
+        /// <returns></returns>
+        public static bool HasJsonContent<T>(this HttpRequestMessage request, T expectedContent)
+        {
+            if (request.Content == null)
+            {
+                throw new ArgumentException($"json content '{expectedContent}' was expected but content is null");
+            }
+
+            var stringContent = request.Content.ReadAsStringAsync().Result;
+            var content = JsonConvert.DeserializeObject<T>(stringContent);
+
+            if (content == null)
+            {
+                throw new ArgumentException($"could not deserialize content to type {typeof(T)}");
+            }
+
+            return expectedContent.Equals(content);
+        }
+
+        /// <summary>
+        /// Determines whether the request matches the specified predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the expected content</typeparam>
+        /// <param name="request">the request</param>
+        /// <param name="predicate">the predicate that matches the content</param>
+        /// <returns></returns>
+        public static bool HasJsonContent<T>(this HttpRequestMessage request, Predicate<T> predicate)
+        {
+            if (request.Content == null)
+            {
+                throw new ArgumentException("content is null");
+            }
+
+            var stringContent = request.Content.ReadAsStringAsync().Result;
+            var content = JsonConvert.DeserializeObject<T>(stringContent);
+
+            if (content == null)
+            {
+                throw new ArgumentException($"could not deserialize content to type {typeof(T)}");
+            }
+
+            return predicate.Invoke(content);
+        }
+
+        /// <summary>
+        /// Determines whether the request contains the specified content as json object.
+        /// </summary>
+        /// <param name="request">the request</param>
+        /// <param name="expectedContent">the expected content</param>
+        /// <returns></returns> 
+        public static bool HasByteArrayContent(this HttpRequestMessage request, byte[] expectedContent)
+        {
+            if (request.Content == null)
+            {
+                throw new ArgumentException("content is null");
+            }
+
+            var content = request.Content.ReadAsByteArrayAsync().Result;
+
+            if (expectedContent.Length != content.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < expectedContent.Length; i++)
+            {
+                if (expectedContent[i] != content[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
-
-
 }
