@@ -100,7 +100,7 @@ namespace MockHttpClient
         }
 
         /// <summary>
-        /// Determines whether the the request contains the specified header.
+        /// Determines whether the request contains the specified header.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="headerName">Name of the header.</param>
@@ -136,36 +136,57 @@ namespace MockHttpClient
         /// <summary>
         /// Determines whether the request contains the specified content as string.
         /// </summary>
-        /// <param name="request">the request</param>
-        /// <param name="expectedContent">the expected content</param>
-        /// <returns></returns>
+        /// <param name="request">The request.</param>
+        /// <param name="expectedContent">The expected content.</param>
+        /// <returns>
+        ///   <c>true</c> if the request contains the specified header; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// request
+        /// or
+        /// expectedContent
+        /// </exception>
         public static bool HasStringContent(this HttpRequestMessage request, string expectedContent)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            if (expectedContent == null) throw new ArgumentNullException(nameof(expectedContent));
+
             if (request.Content == null)
             {
-                throw new ArgumentException($"string content '{expectedContent}' was expected but content is null");
+                return false;
             }
 
-            var content = request.Content.ReadAsStringAsync().Result;
+            var content = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return content.Equals(expectedContent);
         }
 
         /// <summary>
         /// Determines whether the request contains the specified content as json object.
+        /// <c>ExpectedContent</c> is compared by using <c>equals</c> with the deserialized content ofn the request.
         /// </summary>
-        /// <typeparam name="T">The type of the expected content</typeparam>
-        /// <param name="request">the request</param>
-        /// <param name="expectedContent">the expected content</param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of the expected content.</typeparam>
+        /// <param name="request">The request.</param>
+        /// <param name="expectedContent">The expected content.</param>
+        /// <returns>
+        ///   <c>true</c> if the request contains the specified header; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// request
+        /// or
+        /// expectedContent
+        /// </exception>
         public static bool HasJsonContent<T>(this HttpRequestMessage request, T expectedContent)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            if (expectedContent == null) throw new ArgumentNullException(nameof(expectedContent));
+
             if (request.Content == null)
             {
-                throw new ArgumentException($"json content '{expectedContent}' was expected but content is null");
+                return false;
             }
 
-            var stringContent = request.Content.ReadAsStringAsync().Result;
+            var stringContent = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             var content = JsonConvert.DeserializeObject<T>(stringContent);
 
             if (content == null)
@@ -179,18 +200,28 @@ namespace MockHttpClient
         /// <summary>
         /// Determines whether the request matches the specified predicate.
         /// </summary>
-        /// <typeparam name="T">The type of the expected content</typeparam>
-        /// <param name="request">the request</param>
-        /// <param name="predicate">the predicate that matches the content</param>
-        /// <returns></returns>
+        /// <typeparam name="T">The type of the expected content.</typeparam>
+        /// <param name="request">The request.</param>
+        /// <param name="predicate">The predicate that matches the content.</param>
+        /// <returns>
+        ///   <c>true</c> if the request contains the specified header; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// request
+        /// or
+        /// predicate
+        /// </exception>
         public static bool HasJsonContent<T>(this HttpRequestMessage request, Predicate<T> predicate)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
             if (request.Content == null)
             {
-                throw new ArgumentException("content is null");
+                return false;
             }
 
-            var stringContent = request.Content.ReadAsStringAsync().Result;
+            var stringContent = request.Content.ReadAsStringAsync().GetAwaiter().GetResult();
             var content = JsonConvert.DeserializeObject<T>(stringContent);
 
             if (content == null)
@@ -204,17 +235,27 @@ namespace MockHttpClient
         /// <summary>
         /// Determines whether the request contains the specified content as json object.
         /// </summary>
-        /// <param name="request">the request</param>
-        /// <param name="expectedContent">the expected content</param>
-        /// <returns></returns> 
+        /// <param name="request">The request.</param>
+        /// <param name="expectedContent">The expected content.</param>
+        /// <returns>
+        ///   <c>true</c> if the request contains the specified header; otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// request
+        /// or
+        /// expectedContent
+        /// </exception>
         public static bool HasByteArrayContent(this HttpRequestMessage request, byte[] expectedContent)
         {
+            if (request == null) throw new ArgumentNullException(nameof(request));
+            if (expectedContent == null) throw new ArgumentNullException(nameof(expectedContent));
+
             if (request.Content == null)
             {
-                throw new ArgumentException("content is null");
+                return false;
             }
 
-            var content = request.Content.ReadAsByteArrayAsync().Result;
+            var content = request.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
 
             if (expectedContent.Length != content.Length)
             {
