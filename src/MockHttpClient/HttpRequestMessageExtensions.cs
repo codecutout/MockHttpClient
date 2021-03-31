@@ -5,6 +5,8 @@ using System.Net.Http;
 
 namespace MockHttpClient
 {
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Provides extension methods on <see cref="HttpRequestMessage"/>
     /// </summary>
@@ -98,7 +100,7 @@ namespace MockHttpClient
         }
 
         /// <summary>
-        /// Determines whether the the request contains the specified header.
+        /// Determines whether the request contains the specified header.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <param name="headerName">Name of the header.</param>
@@ -131,6 +133,4 @@ namespace MockHttpClient
             return false;
         }
     }
-
-
 }

@@ -26,7 +26,7 @@ namespace MockHttpClient.Test
         }
 
         [Fact]
-        public async Task When_header_wihtout_value_should_match_any_value()
+        public async Task When_header_without_value_should_match_any_value()
         {
             var client = new MockHttpClient();
 
