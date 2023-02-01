@@ -4,8 +4,8 @@ Easily mock `HttpClient` for testing
 
 ```csharp
 //Arrange
-var mockHttpClient = new MockHttpClient();
-mockHttpClient.When("http://www.google.com").Returns(HttpStatusCode.OK)
+var client = new MockHttpClient();
+client.When("http://www.google.com").Returns(HttpStatusCode.OK)
 
 //Act
 var response = await client.GetAsync(requestUri);
